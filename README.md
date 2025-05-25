@@ -1,19 +1,41 @@
 # 🔍 Gemini API Model Checker
 
-> **Tool lengkap untuk mengecek dan menggunakan Google AI API (Gemini, Veo2, Imagen) dengan panduan bahasa Indonesia**
+![Python](https://img.shields.io/badge/python-3.7+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Google AI](https://img.shields.io/badge/Google%20AI-Gemini-orange.svg)
 
-[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Indonesian](https://img.shields.io/badge/Docs-Bahasa%20Indonesia-red.svg)](#)
+Tool sederhana untuk mengecek kompatibilitas API key Google AI dengan berbagai model terbaru seperti **Gemini 2.5**, **Imagen 3**, **Veo 2**, dan lainnya.
 
-## 🎯 Apa itu Gemini API Model Checker?
+## ✨ Fitur
 
-Tool ini membantu Anda:
-- ✅ **Mengecek model mana saja** yang bisa diakses dengan API key Google AI Anda
-- 🎬 **Generate video dengan Veo2** (model video AI terbaru Google)
-- 📝 **Membuat script video** dengan Gemini untuk berbagai keperluan
-- 💳 **Panduan setup billing** GCP untuk akses model premium
-- 🔧 **Troubleshooting** masalah API dan quota
+- 🚀 **Quick Check** - Test model populer dalam hitungan detik
+- 📊 **Comprehensive Check** - Test semua model yang tersedia
+- 💳 **Billing Detection** - Deteksi model mana yang perlu GCP billing
+- ⏳ **Quota Status** - Cek apakah quota sudah habis
+- 📝 **Detailed Report** - Generate laporan lengkap dengan timestamp
+- 🎯 **Model Categories** - Text, Image, Video, Audio & Embedding
+
+## 🔧 Model yang Didukung
+
+### 📝 Text Models
+- ✅ Gemini 2.5 Flash/Pro (Terbaru)
+- ✅ Gemini 2.0 Flash/Lite
+- ✅ Gemini 1.5 Flash/Pro
+- ✅ Legacy models
+
+### 🖼️ Image Models  
+- ✅ Imagen 3.0 (Terbaru)
+- ✅ Gemini 2.0 Flash Image Generation
+- ✅ Legacy Imagen models
+
+### 🎬 Video Models
+- ✅ Veo 2.0 (Terbaru)
+- ✅ Legacy video models
+
+### 🔊 Audio & Embedding
+- ✅ Gemini Embedding
+- ✅ Gemini 2.0 Flash Live
+- ✅ Text embeddings
 
 ## 🚀 Quick Start
 
@@ -22,51 +44,27 @@ Tool ini membantu Anda:
 pip install google-genai>=1.10.0
 ```
 
-### 2. Dapatkan API Key
-1. Kunjungi [Google AI Studio](https://aistudio.google.com/app/apikey)
-2. Login dengan akun Google
-3. Buat API key baru
-4. Copy API key tersebut
-
-### 3. Jalankan Model Checker
-```bash
-git clone https://github.com/username/gemini-api-model-checker.git
-cd gemini-api-model-checker
-python3 api_model_checker.py
-```
-
-### 4. Masukkan API Key
-Edit file `api_model_checker.py` dan ganti:
+### 2. Setup API Key
+Dapatkan API key dari [Google AI Studio](https://aistudio.google.com/app/apikey), lalu edit script:
 ```python
-os.environ['GOOGLE_API_KEY'] = "MASUKKAN_API_KEY_ANDA_DISINI"
+os.environ['GOOGLE_API_KEY'] = "YOUR_API_KEY_HERE"
 ```
 
-## 📁 Struktur File
-
-```
-gemini-api-model-checker/
-├── api_model_checker.py     # Script utama untuk cek model
-├── veo2_video_generator.py  # Generator video dengan Veo2
-├── gemini_script_maker.py   # Pembuat script video dengan Gemini
-├── templates/               # Template offline
-│   ├── video_script_template.md
-│   └── storyboard_template.md
-├── docs/                    # Dokumentasi lengkap
-│   ├── setup_gcp_billing.md
-│   ├── troubleshooting.md
-│   └── tutorial_lengkap.md
-└── README.md               # File ini
-```
-
-## 🔧 Fitur Utama
-
-### 1. 🔍 Model Checker
-Cek model apa saja yang bisa diakses:
+### 3. Jalankan Script
 ```bash
-python3 api_model_checker.py
+python api_model_checker.py
 ```
 
-**Output yang diharapkan:**
+### 4. Pilih Mode Testing
+```
+Select testing mode:
+1. Quick check (popular models only)    # Cepat, test 5 model utama
+2. Comprehensive check (all models)     # Lengkap, test semua model
+```
+
+## 📊 Sample Output
+
+### Quick Check Mode
 ```
 🎯 QUICK CHECK: POPULAR MODELS
 ========================================
@@ -74,121 +72,85 @@ python3 api_model_checker.py
    📝 Most common free text model
    ✅ AVAILABLE
 
+🧪 gemini-2.0-flash
+   📝 Latest multimodal model
+   ⏳ QUOTA LIMITED
+
+🧪 imagen-3.0-generate-002
+   📝 Latest image generation
+   💳 NEEDS BILLING
+
 🧪 veo-2.0-generate-001
    📝 Latest video generation
    💳 NEEDS BILLING
+
+📊 QUICK SUMMARY:
+✅ Available: 1
+💳 Need billing: 2
+⏳ Quota limited: 1
 ```
 
-### 2. 🎬 Veo2 Video Generator
-Generate video AI dengan Veo2:
-```bash
-python3 veo2_video_generator.py
-```
+## 🔍 Status Legend
 
-**Contoh prompt:**
-```
-"Close-up shot kucing lucu bermain dengan benang wol, pencahayaan hangat, style cinematic"
-```
+| Status | Keterangan |
+|--------|------------|
+| ✅ **AVAILABLE** | Model bisa digunakan langsung |
+| 💳 **NEEDS BILLING** | Perlu setup GCP billing |
+| ⏳ **QUOTA LIMITED** | Kena rate limit, tunggu reset |
+| ❌ **ERROR/NOT FOUND** | Model tidak ditemukan atau error |
 
-### 3. 📝 Gemini Script Generator
-Buat script video dengan Gemini:
-```bash
-python3 gemini_script_maker.py
-```
+## 💡 Troubleshooting
 
-## 📊 Model yang Didukung
+### Problem: "NEEDS BILLING"
+**Solution:** Setup Google Cloud Platform billing
+1. Buka [Google Cloud Console](https://console.cloud.google.com/billing)
+2. Create billing account dengan kartu kredit
+3. Link project ke billing account
+4. Dapatkan $300 free credit untuk akun baru
 
-| Model | Jenis | Status | Kebutuhan |
-|-------|--------|---------|-----------|
-| `gemini-1.5-flash` | Text | ✅ Gratis | API Key |
-| `gemini-2.0-flash` | Multimodal | ✅ Gratis | API Key |
-| `imagen-3.0-generate-002` | Image | 💳 Berbayar | GCP Billing |
-| `veo-2.0-generate-001` | Video | 💳 Berbayar | GCP Billing |
-| `gemini-2.5-pro-preview` | Advanced | 💳 Berbayar | GCP Billing |
+### Problem: "QUOTA LIMITED"  
+**Solution:** 
+- Tunggu 24 jam untuk quota reset
+- Atau setup billing untuk quota lebih besar
 
-## 💳 Setup GCP Billing (untuk Model Premium)
-
-Untuk mengakses Veo2 dan Imagen, perlu setup billing:
-
-1. **Buka Google Cloud Console:** https://console.cloud.google.com/
-2. **Setup Billing Account:** Menu Billing → Create billing account
-3. **Masukkan kartu kredit** (dapat free credit $300 untuk akun baru)
-4. **Link project** dengan billing account
-5. **Enable Vertex AI API**
-
-📖 **Panduan lengkap:** [docs/setup_gcp_billing.md](docs/setup_gcp_billing.md)
-
-## 🎬 Contoh Penggunaan Veo2
-
-```python
-from veo2_generator import generate_video_from_text
-
-# Generate video kucing lucu
-result = generate_video_from_text(
-    "Close-up shot seekor kucing orange bermain dengan bola benang, pencahayaan hangat, style cinematic",
-    "kucing_lucu.mp4"
-)
-
-if result:
-    print(f"✅ Video berhasil: {result}")
-```
-
-## 🔧 Troubleshooting
-
-### Error "NEEDS BILLING"
-**Solusi:** Setup GCP billing untuk akses model premium
-- [Panduan setup billing](docs/setup_gcp_billing.md)
-
-### Error "QUOTA LIMITED"  
-**Solusi:** Tunggu 24 jam untuk reset quota, atau setup billing
-- Free tier: 15 requests/menit
-- Dengan billing: Quota lebih besar
-
-### Error "API KEY INVALID"
-**Solusi:** 
-1. Cek API key sudah benar
-2. Pastikan project memiliki akses Gemini API
-3. Enable APIs yang diperlukan
-
-📖 **Troubleshooting lengkap:** [docs/troubleshooting.md](docs/troubleshooting.md)
+### Problem: API Key Invalid
+**Solution:**
+- Pastikan API key dari [Google AI Studio](https://aistudio.google.com/app/apikey)
+- Enable Gemini API di project
+- Cek API key belum expired
 
 ## 📋 Requirements
 
-- **Python:** 3.7 atau lebih baru
-- **Library:** `google-genai>=1.10.0`
-- **API Key:** Google AI Studio API key
-- **Billing:** GCP billing (untuk model premium)
+- Python 3.7+
+- google-genai>=1.10.0
+- Google AI API key
+- Internet connection
 
-## 🤝 Kontribusi
-
-Kontribusi sangat diterima! Silakan:
+## 🤝 Contributing
 
 1. Fork repository ini
-2. Buat branch fitur baru (`git checkout -b fitur-baru`)
-3. Commit perubahan (`git commit -am 'Tambah fitur baru'`)
-4. Push ke branch (`git push origin fitur-baru`)
-5. Buat Pull Request
+2. Create feature branch (`git checkout -b feature/nama-fitur`)
+3. Commit changes (`git commit -am 'Tambah fitur baru'`)
+4. Push ke branch (`git push origin feature/nama-fitur`)
+5. Create Pull Request
 
-## 📄 Lisensi
+## 📄 License
 
-MIT License - lihat file [LICENSE](LICENSE) untuk detail.
+MIT License - Silakan gunakan dan modifikasi sesuai kebutuhan.
 
-## 🙏 Kredit
+## 🙏 Acknowledgments
 
-- **Google AI** untuk Gemini API dan Veo2
-- **Komunitas Indonesia** untuk feedback dan testing
-- **Contributors** yang membantu pengembangan
+- Google AI Team untuk Gemini API
+- Community Python Indonesia
+- Contributors dan testers
 
-## 📞 Kontak & Support
+## 📞 Support
 
-- 🐛 **Bug Report:** [Issues](https://github.com/username/gemini-api-model-checker/issues)
-- 💬 **Diskusi:** [Discussions](https://github.com/username/gemini-api-model-checker/discussions)
-- 📧 **Email:** your.email@example.com
-
-## ⭐ Star Repository
-
-Jika tool ini bermanfaat, jangan lupa star repository ini! ⭐
+Jika ada pertanyaan atau masalah:
+- 🐛 **Bug reports:** Create GitHub issue
+- 💬 **Diskusi:** GitHub Discussions
+- 📧 **Email:** [kontak@classy.id]
 
 ---
 
-**Made with ❤️ untuk komunitas AI Indonesia**
+⭐ **Jika tool ini membantu, jangan lupa kasih star!** ⭐
