@@ -6,6 +6,8 @@
 
 Tool sederhana untuk mengecek kompatibilitas API key Google AI dengan berbagai model terbaru seperti **Gemini 2.5**, **Imagen 3**, **Veo 2**, dan lainnya.
 
+![ScreenShoot](https://blog.classy.id/upload/gambar_berita/5c36436c504eff13f07d427c93d18e47_20250526061644.png)
+
 ## ✨ Fitur
 
 - 🚀 **Quick Check** - Test model populer dalam hitungan detik
